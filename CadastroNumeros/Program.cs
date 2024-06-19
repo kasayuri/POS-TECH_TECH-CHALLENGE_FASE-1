@@ -1,9 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
+using CadastroNumeros.Implementations;
+using CadastroNumeros.Interfaces;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IContatoCadastro, ContatoCadastro>();
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

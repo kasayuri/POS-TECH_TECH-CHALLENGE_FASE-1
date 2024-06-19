@@ -13,25 +13,32 @@ namespace CadastroNumeros.Controllers
     public class ContatoController : ControllerBase
     {
         private readonly IContatoCadastro _contatoCadastro;
-        public ContatoController(IContatoCadastro _contatoCadastro)
+        public ContatoController(IContatoCadastro contatoCadastro)
         {
-            _contatoCadastro = _contatoCadastro;
+            _contatoCadastro = contatoCadastro;
         }
 
         [HttpGet("Contato")]
-        public IActionResult Get(IServiceProvider serviceProvider, int id) 
+        public IActionResult Get() 
         {
-            var contatoCadastro = serviceProvider.GetRequiredService<IContatoCadastro>();
-            return Ok();
+            return Ok(_contatoCadastro.ListarContatos());
         }
 
         [HttpPost("inserirContato")]
-        public IActionResult Post(IServiceProvider serviceProvider, Contato contato) 
+        public IActionResult PostInserirContato([FromBody] Contato contato) 
         {
-            var contatoCadastro = serviceProvider.GetRequiredService<IContatoCadastro>();
-            contatoCadastro.CriarContato(contato);
+            _contatoCadastro.CriarContato(contato);
             return Ok(contato);
         }
-        
+        [HttpPut("atualizacaoContato")]
+        public IActionResult PutAtualizacaoContato([FromBody] Contato contato)
+        {
+            return NoContent();
+        }
+        [HttpDelete("deleteContato")]
+        public IActionResult DeleteCadastro(string idContato)
+        {
+            return NoContent();
+        }
     }
 }
