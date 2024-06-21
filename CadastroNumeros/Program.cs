@@ -2,7 +2,7 @@ using CadastroNumeros.Implementations;
 using CadastroNumeros.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<IContatoCadastro, ContatoCadastro>();
+builder.Services.AddSingleton<IContatoCadastro, ContatoRepository>();
 
 
 builder.Services.AddControllers();

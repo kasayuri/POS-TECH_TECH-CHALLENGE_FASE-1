@@ -26,8 +26,6 @@
         {
             return DDDsValidos.Contains(Codigo);
         }
-
-
         public string ToString() { return _DDD; }
     }
 }

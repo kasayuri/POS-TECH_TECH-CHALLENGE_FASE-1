@@ -3,7 +3,7 @@ using CadastroNumeros.Interfaces;
 
 namespace CadastroNumeros.Implementations
 {
-    public class BancoDadosCadastro : IBancoDados
+    public class BancoDadosRepository : IBancoDados
     {
         public int Inserir<T>()
         {
