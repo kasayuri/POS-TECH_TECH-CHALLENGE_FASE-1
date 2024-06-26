@@ -7,7 +7,11 @@
         public string Nome { get; set; }
         public string Idade { get; set; }
         public string Endereco { get; set; }
+        public int DDDId { get; set; }
         public DDD DDD { get; set; }
+
+        public Contato() { }
+
         public Contato(int id, string nome, string idade, string endereco, DDD dDD)
         {
             Id = id;
