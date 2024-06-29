@@ -19,7 +19,19 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Contato>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.HasOne(e => e.DDD).WithMany(d => d.Contatos).HasForeignKey(e => e.DDDId);
+            entity.Property(e => e.DataCriacao).IsRequired();
+            entity.Property(e => e.Nome).IsRequired();
+            entity.Property(e => e.Idade).IsRequired();
+            entity.Property(e => e.NumeroTel).IsRequired();
+            entity.Property(e => e.Endereco).IsRequired();
+
+
+            entity.HasOne(e => e.DDD).WithMany(d => d.Contatos).HasForeignKey(e => e.DDDId).IsRequired();
+        });
+        modelBuilder.Entity<DDD>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e._DDD).IsRequired();
         });
     }
 }
