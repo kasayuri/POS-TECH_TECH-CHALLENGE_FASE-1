@@ -2,9 +2,8 @@
 
 namespace CadastroNumeros.Interfaces
 {
-    public interface IContatoCadastro
+    public interface IContatoRepository
     {
-        IList<Contato> listaContato { get; set; }
         public IEnumerable<Contato> ListarContatos();
         public Contato RetornarContato(int id);
         public Contato CriarContato(Contato contato);

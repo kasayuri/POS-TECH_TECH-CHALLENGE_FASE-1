@@ -1,14 +1,15 @@
-﻿using CadastroNumeros.Interfaces;
+﻿using CadastroNumeros.Data;
+using CadastroNumeros.Interfaces;
 using CadastroNumeros.Models;
 
 namespace CadastroNumeros.Implementations;
 
-public class ContatoRepository : IContatoCadastro
+public class ContatoRepository : IContatoRepository
 {
-    public IList<Contato> listaContato { get; set; }
-    public ContatoRepository()
+    private readonly AppDbContext _context;
+    public ContatoRepository(AppDbContext context)
     {
-        this.listaContato = new List<Contato>();
+        _context = context;
     }
 
     /// <summary>
@@ -20,8 +21,8 @@ public class ContatoRepository : IContatoCadastro
     /// </returns>
     public Contato CriarContato(Contato contato)
     {
-        contato.Id = listaContato.Select(x => x.Id).Any() ? listaContato.Select(x => x.Id).Max() + 1 : 1;
-        listaContato.Add(contato);
+        _context.Add(contato);
+        _context.SaveChanges();
         return contato;
     }
 
@@ -34,7 +35,7 @@ public class ContatoRepository : IContatoCadastro
     /// /returns>
     public Contato RetornarContato(int id)
     {
-        throw new NotImplementedException();
+        return _context.Contatos.Find(id);
     }
 
     /// <summary>
@@ -43,7 +44,7 @@ public class ContatoRepository : IContatoCadastro
     /// <returns>Lista de objetos do tipo Contato</returns>
     public IEnumerable<Contato> ListarContatos()
     {
-        throw new NotImplementedException();
+        return _context.Contatos.ToList();
     }
 
     /// <summary>
@@ -52,7 +53,8 @@ public class ContatoRepository : IContatoCadastro
     /// <param name="contato">Um objeto do tipo Contato</param>
     public void AtualizarContato(Contato contato)
     {
-        throw new NotImplementedException();
+        _context.Contatos.Update(contato);
+        _context.SaveChanges();
     }
 
     /// <summary>
@@ -61,6 +63,15 @@ public class ContatoRepository : IContatoCadastro
     /// <param name="Id">Id do Contato</param>
     public void DeletarContato(int Id)
     {
-        throw new NotImplementedException();
+        var contatoEncontrado = _context.Contatos.Find(Id);
+        if (contatoEncontrado != null)
+        {
+            _context.Remove(contatoEncontrado);
+            _context.SaveChanges();
+        }
+        else
+        {
+            throw new Exception("Contato não encontrado na base de dados");
+        }
     }
 }

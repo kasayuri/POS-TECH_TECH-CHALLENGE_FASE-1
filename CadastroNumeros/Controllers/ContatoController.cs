@@ -1,4 +1,5 @@
 ﻿
+using CadastroNumeros.Data;
 using CadastroNumeros.Implementations;
 using CadastroNumeros.Interfaces;
 using CadastroNumeros.Models;
@@ -6,39 +7,85 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace CadastroNumeros.Controllers
+namespace CadastroNumeros.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class ContatoController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ContatoController : ControllerBase
+    private readonly IContatoRepository _repository;
+    public ContatoController(IContatoRepository repository)
     {
-        private readonly IContatoCadastro _contatoCadastro;
-        public ContatoController(IContatoCadastro contatoCadastro)
-        {
-            _contatoCadastro = contatoCadastro;
-        }
+        _repository = repository;
+    }
 
-        [HttpGet("Contato")]
-        public IActionResult Get() 
-        {
-            return Ok(_contatoCadastro.ListarContatos());
-        }
+    [HttpGet("retornar-contatos")]
+    public ActionResult<IEnumerable<Contato>> GetAll() 
+    {
+        return Ok(_repository.ListarContatos());
+    }
 
-        [HttpPost("inserirContato")]
-        public IActionResult PostInserirContato([FromBody] Contato contato) 
+    [HttpGet("retornar-contato/{id}")]
+    public ActionResult GetById(int id)
+    {
+        var contatoEncontrado = _repository.RetornarContato(id);
+        if (contatoEncontrado != null)
         {
-            _contatoCadastro.CriarContato(contato);
-            return Ok(contato);
+            return Ok(contatoEncontrado);
         }
-        [HttpPut("atualizacaoContato")]
-        public IActionResult PutAtualizacaoContato([FromBody] Contato contato)
+        else return NotFound();
+    }
+    [HttpPost("inserir-contato")]
+    public IActionResult PostInserirContato([FromBody] Contato contato) 
+    {
+        if (contato == null) 
+        { 
+            return BadRequest("Contato não pode ser nulo");
+        }
+        try
         {
+            _repository.CriarContato(contato);
+            return CreatedAtAction(nameof(GetById), new { id = contato.Id}, contato);
+        }
+        catch (Exception ex) 
+        {   
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+    [HttpPut("atualizar-contato")]
+    public IActionResult PutAtualizacaoContato([FromBody] Contato contato)
+    {
+        if (contato == null)
+        {
+            return BadRequest("Contato não pode ser nulo");
+        }
+        try
+        {
+         _repository.AtualizarContato(contato); 
+         return Ok(contato);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+    [HttpDelete("delete-contato/{id}")]
+    public IActionResult DeleteCadastro(int idContato)
+    {
+        try
+        {
+            var contatoEncontrado = _repository.RetornarContato(idContato);
+            if (contatoEncontrado == null)
+            {
+                return NotFound("Contato não encontrado");
+            }
+            _repository.DeletarContato(idContato);
             return NoContent();
         }
-        [HttpDelete("deleteContato")]
-        public IActionResult DeleteCadastro(string idContato)
+        catch(Exception ex)
         {
-            return NoContent();
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
+
     }
 }
