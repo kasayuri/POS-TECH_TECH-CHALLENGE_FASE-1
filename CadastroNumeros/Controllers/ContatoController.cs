@@ -43,7 +43,8 @@ public class ContatoController : ControllerBase
             return BadRequest("Contato não pode ser nulo");
         }
         try
-        {
+        {   
+            contato.DataCriacao = DateTime.Now;
             _repository.CriarContato(contato);
             return CreatedAtAction(nameof(GetById), new { id = contato.Id}, contato);
         }
@@ -53,16 +54,29 @@ public class ContatoController : ControllerBase
         }
     }
     [HttpPut("atualizar-contato")]
-    public IActionResult PutAtualizacaoContato([FromBody] Contato contato)
+    public IActionResult PutAtualizacaoContato([FromBody] Contato contatoAtualizado)
     {
-        if (contato == null)
+        if (contatoAtualizado == null)
         {
-            return BadRequest("Contato não pode ser nulo");
+            return BadRequest("Todos os dados devem ser preenchidos");
         }
         try
         {
-         _repository.AtualizarContato(contato); 
-         return Ok(contato);
+            var contatoRecuperado = _repository.RetornarContato(contatoAtualizado.Id);
+            if(contatoRecuperado != null)
+            {
+                contatoRecuperado.Nome = contatoAtualizado.Nome;
+                contatoRecuperado.Idade = contatoAtualizado.Idade;
+                contatoRecuperado.NumeroTel = contatoAtualizado.NumeroTel;
+                contatoRecuperado.DDD = contatoAtualizado.DDD;
+                contatoRecuperado.Endereco = contatoAtualizado.Endereco;
+                _repository.AtualizarContato(contatoRecuperado); 
+                return Ok(contatoRecuperado);
+            }
+            else
+            {
+                return BadRequest("Contato não encontrado");
+            }
         }
         catch (Exception ex)
         {

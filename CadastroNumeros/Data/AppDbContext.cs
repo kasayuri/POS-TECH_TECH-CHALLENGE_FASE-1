@@ -19,19 +19,18 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Contato>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.DataCriacao).IsRequired();
-            entity.Property(e => e.Nome).IsRequired();
-            entity.Property(e => e.Idade).IsRequired();
-            entity.Property(e => e.NumeroTel).IsRequired();
-            entity.Property(e => e.Endereco).IsRequired();
-
+            entity.Property(e => e.DataCriacao).HasColumnName("DataCriacao").HasColumnType("DATETIME").IsRequired();
+            entity.Property(e => e.Nome).HasColumnType("VARCHAR(100)").IsRequired();
+            entity.Property(e => e.Idade).HasColumnType("INT").IsRequired();
+            entity.Property(e => e.NumeroTel).HasColumnType("INT").IsRequired();
+            entity.Property(e => e.Endereco).HasColumnType("VARCHAR(256)").IsRequired();
 
             entity.HasOne(e => e.DDD).WithMany(d => d.Contatos).HasForeignKey(e => e.DDDId).IsRequired();
         });
         modelBuilder.Entity<DDD>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e._DDD).IsRequired();
+            entity.Property(e => e._DDD).HasColumnType("VARCHAR(3)").IsRequired();
         });
     }
 }
