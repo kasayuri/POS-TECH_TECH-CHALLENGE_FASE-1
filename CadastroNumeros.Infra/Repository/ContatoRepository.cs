@@ -56,7 +56,7 @@ public class ContatoRepository : IContatoRepository
     {
         var contatoSalvo = await _context.Contatos.FindAsync(contato.Id);
 
-        contatoSalvo.DDDId = contato.DDDId;
+        contatoSalvo.DDD = contato.DDD;
         contatoSalvo.Endereco = contato.Endereco;
         contatoSalvo.Idade = contato.Idade;
         contatoSalvo.Nome = contato.Nome;

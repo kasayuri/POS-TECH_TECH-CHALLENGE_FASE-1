@@ -1,5 +1,8 @@
+using System.Configuration;
 using System.Reflection;
+using CadastroNumeros.Infra.Data;
 using CadastroNumeros.IoC.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
