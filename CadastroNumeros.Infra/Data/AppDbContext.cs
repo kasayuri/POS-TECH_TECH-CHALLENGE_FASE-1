@@ -1,7 +1,7 @@
-﻿using CadastroNumeros.Models;
+﻿using CadastroNumeros.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CadastroNumeros.Data;
+namespace CadastroNumeros.Infra.Data;
 
 public class AppDbContext : DbContext
 {

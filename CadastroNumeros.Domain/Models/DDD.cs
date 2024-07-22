@@ -1,4 +1,4 @@
-﻿namespace CadastroNumeros.Models
+﻿namespace CadastroNumeros.Domain.Models
 {
     public class DDD
     {
@@ -26,7 +26,7 @@
         "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87", "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99"
         };
 
-        public static bool IsValid(string Codigo)
+        public bool IsValid(string Codigo)
         {
             return DDDsValidos.Contains(Codigo);
         }

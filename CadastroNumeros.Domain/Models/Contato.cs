@@ -1,4 +1,4 @@
-﻿namespace CadastroNumeros.Models
+﻿namespace CadastroNumeros.Domain.Models
 {
     public class Contato
     {

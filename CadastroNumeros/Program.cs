@@ -1,14 +1,9 @@
-using CadastroNumeros.Data;
-using CadastroNumeros.Implementations;
-using CadastroNumeros.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using CadastroNumeros.IoC.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
