@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CadastroNumeros.Migrations
+namespace CadastroNumeros.Infra.Migrations
 {
     /// <inheritdoc />
     public partial class AddDataCriacaoToContato : Migration

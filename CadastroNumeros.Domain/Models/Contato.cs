@@ -1,4 +1,4 @@
-﻿namespace CadastroNumeros.Models
+﻿namespace CadastroNumeros.Domain.Models
 {
     public class Contato
     {
@@ -9,12 +9,12 @@
         public int Idade { get; set; }
         public int NumeroTel { get; set; }
         public string Endereco { get; set; }
-        public int DDDId { get; set; }
-        public DDD DDD { get; set; }
+        public int DDD { get; set; }
+        public virtual DDD _DDD { get; set; }
 
         public Contato() { }
 
-        public Contato(int id, string nome, int idade, int numeroTel, string endereco, DDD dDD)
+        public Contato(int id, string nome, int idade, int numeroTel, string endereco, int dDD)
         {
             Id = id;
             Nome = nome;

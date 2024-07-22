@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CadastroNumeros.Migrations
+namespace CadastroNumeros.Infra.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
