@@ -2,7 +2,7 @@
 using CadastroNumeros.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CadastroNumeros.Data.Tests
+namespace CadastroNumeros.Teste.Data
 {
     public class AppDbContextTests
     {

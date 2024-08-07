@@ -3,7 +3,7 @@ using CadastroNumeros.Implementations;
 using CadastroNumeros.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CadastroNumeros.Repository.Tests
+namespace CadastroNumeros.Teste.Repository
 {
     public class ContatoRepositoryTests
     {

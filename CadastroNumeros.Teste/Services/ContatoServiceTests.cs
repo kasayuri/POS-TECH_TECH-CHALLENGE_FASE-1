@@ -3,7 +3,7 @@ using CadastroNumeros.Infra.Interfaces.Repository;
 using CadastroNumeros.Infra.Services;
 using Moq;
 
-namespace CadastroNumeros.Services.Tests
+namespace CadastroNumeros.Teste.Services
 {
     public class ContatoServiceTests
     {

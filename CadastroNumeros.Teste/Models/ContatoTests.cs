@@ -1,7 +1,7 @@
 ﻿using CadastroNumeros.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace CadastroNumeros.Models.Tests
+namespace CadastroNumeros.Teste.Models
 {
     public class ContatoTests
     {

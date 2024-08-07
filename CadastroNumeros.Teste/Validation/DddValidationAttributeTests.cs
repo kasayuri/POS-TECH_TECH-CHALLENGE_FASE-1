@@ -1,6 +1,6 @@
 ﻿using CadastroNumeros.Domain.Validation;
 
-namespace CadastroNumeros.Validation.Tests
+namespace CadastroNumeros.Teste.Validation
 {
     public class DddValidationAttributeTests
     {

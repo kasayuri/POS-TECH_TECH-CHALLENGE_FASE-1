@@ -4,7 +4,7 @@ using CadastroNumeros.Infra.Interfaces.Service;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
-namespace CadastroNumeros.Controllers.Tests
+namespace CadastroNumeros.Teste.Controllers
 {
     public class ContatoControllerTests
     {
