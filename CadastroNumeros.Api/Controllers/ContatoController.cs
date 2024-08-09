@@ -49,18 +49,19 @@ public class ContatoController : ControllerBase
     {
         if (contato == null)
             return BadRequest("Contato não pode ser nulo");
-        
+
         try
         {
-            contato.Id = new Guid();
+            contato.Id = Guid.NewGuid(); // Gerar um novo GUID para o contato
             var contatoCriado = await _service.CriarContato(contato);
-            return CreatedAtAction(nameof(GetById), new { id = contatoCriado.Id }, contato);
+            return CreatedAtAction(nameof(GetById), new { id = contatoCriado.Id }, contatoCriado); // Retornar CreatedAtAction com o ID correto
         }
         catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
+
     [HttpPut("atualizar-contato")]
     public async Task<IActionResult> PutAtualizacaoContato([FromBody] Contato contatoAtualizado)
     {
