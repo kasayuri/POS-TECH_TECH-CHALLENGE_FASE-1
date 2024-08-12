@@ -118,9 +118,10 @@ namespace CadastroNumeros.Teste.Controllers
         {
             // Arrange
             var contato = new Contato { Id = Guid.NewGuid(), Nome = "Carlos Silva", Idade = 28, Email = "carlos.silva@example.com", Telefone = "987654321", CodigoDdd = 21 };
+            var qtdLinhasAtualizadas = 1;
 
             _mockService.Setup(s => s.RetornarContato(contato.Id)).ReturnsAsync(contato);
-            _mockService.Setup(s => s.AtualizarContato(contato)).Returns(Task.CompletedTask);
+            _mockService.Setup(s => s.AtualizarContato(contato)).ReturnsAsync(qtdLinhasAtualizadas);
 
             // Act
             var result = await _controller.PutAtualizacaoContato(contato);

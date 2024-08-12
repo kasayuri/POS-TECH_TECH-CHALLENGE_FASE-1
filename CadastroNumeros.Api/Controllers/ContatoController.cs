@@ -71,16 +71,10 @@ public class ContatoController : ControllerBase
         }
         try
         {
-            var contatoRecuperado = await _service.RetornarContato(contatoAtualizado.Id);
-            if (contatoRecuperado != null)
-            {
-                await _service.AtualizarContato(contatoRecuperado);
-                return Ok(contatoRecuperado);
-            }
-            else
-            {
-                return BadRequest("Contato não encontrado");
-            }
+            int linhasAtualizadas = await _service.AtualizarContato(contatoAtualizado);
+            return (linhasAtualizadas > 0) ?
+                Ok(contatoAtualizado)
+                : BadRequest("Contato não encontrado");
         }
         catch (Exception ex)
         {

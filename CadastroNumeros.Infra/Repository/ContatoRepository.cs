@@ -63,10 +63,10 @@ public class ContatoRepository : IContatoRepository
     /// Método responsável por atualizar as informações de um contato no banco de dados
     /// </summary>
     /// <param name="contato">Um objeto do tipo Contato</param>
-    public async Task AtualizarContato(Contato contato)
+    public async Task<int> AtualizarContato(Contato contato)
     {
         _context.Contatos.Update(contato);
-        _context.SaveChanges();
+        return _context.SaveChanges();
     }
 
     /// <summary>
