@@ -12,9 +12,9 @@ public class ContatoService : IContatoService
     {
         _contatoRepository = contatoRepository;
     }
-    public async Task AtualizarContato(Contato contato)
+    public async Task<int> AtualizarContato(Contato contato)
     {
-        await _contatoRepository.AtualizarContato(contato);
+        return await _contatoRepository.AtualizarContato(contato);
     }
 
     public async Task<Contato> CriarContato(Contato contato)
